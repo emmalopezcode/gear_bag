@@ -1,0 +1,27 @@
+project outline / ideas
+
+basically how it will work is:
+
+I first will get all of the data from the api regarding
+which objects to put in my smooth and responsive ui data.
+	-research their api via their github
+        -use fetch
+	-research displaying responsive data in react
+
+I will also create a little drag and drop box that -on drop-
+adds the piece of data to the local storage
+	-push it in and act like the object is an array?
+	-perhaps use the name as the key and other data as value?
+
+Then as that changes the app will 'react' and fill the gearbag with
+the new items.
+
+for the layout, on desktop or tablet the bag will be off to the side
+and for the mobile it will be at the bottom. Either way it will hover
+in place as the items are scrolled.
+
+react classes i will need
+
+Grid Element { apiData}
+Grid {array of gridElements - informed by api req}
+Bag {array of gridElements - informed by localStorage}
