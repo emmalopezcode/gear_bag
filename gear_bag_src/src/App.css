@@ -1,5 +1,24 @@
 .App {
   text-align: center;
+  background-color: red;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+}
+
+.grid-container {
+  text-align: center;
+  background-color: #282c34;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+}
+
+.test {
+  padding : 10px;
+  text-align: 'center';
+  background-color: #61dafb;
+  color: #61dafb;
 }
 
 .App-logo {
