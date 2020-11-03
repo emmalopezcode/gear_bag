@@ -2,6 +2,12 @@ import { Grid, Paper } from "@material-ui/core";
 import './App.css';
 import React from "react";
 
+function Desc(data) {
+   return <p>
+      {data}
+   </p>;
+}
+
 
 export class GearGrid extends React.Component {
    constructor(props) {
@@ -9,18 +15,20 @@ export class GearGrid extends React.Component {
       this.state = {
          error: null,
          isLoaded: false,
-         items: []
+         items: [],
+         data: null
       };
    }
+   //api/2.0/wikis/CATEGORY
 
    componentDidMount() {
-      fetch("https://www.ifixit.com")
+      fetch("https://www.ifixit.com/api/2.0/wikis/CATEGORY")
          .then(res => res.json())
          .then(
             (result) => {
                this.setState({
                   isLoaded: true,
-                  items: result.items
+                  data: result
                });
             },
             // Note: it's important to handle errors here
@@ -36,17 +44,22 @@ export class GearGrid extends React.Component {
    }
 
    render() {
-      const { error, isLoaded, items } = this.state;
+      const { error, isLoaded, items, data } = this.state;
       if (error) {
          return <div>Error: {error.message}</div>;
       } else if (!isLoaded) {
          return <div>Loading...</div>;
       } else {
+         console.log('this is the result')
+         console.log(data)
+         var item = data[0];
+         console.log(item.namespace)
          return (
+            //<p>{JSON.stringify(data[0])}</p>
             <Grid className="grid-container" container spacing={2} md={9}>
-               {items.map(item => (
+               {data.map(item => (
                   <Grid item xs={12} md={4}>
-                     <Paper className="test"> {item.name} </Paper>
+                     <img key= {item.toString()} src = {item.image.standard}></img>
                   </Grid>
                ))}
             </Grid>
