@@ -2,4 +2,6 @@
 
 research and create main gameplan [plan.txt] 1.25 hrs
 get react fully set up with github .5 hrs
-
+firguring out react 1.5 hrs
+adding making images appear in grid 1.5 hrs
+draggable 1 hrs

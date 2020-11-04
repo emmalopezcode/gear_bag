@@ -1,24 +1,12 @@
-import logo from './logo.svg';
 import './App.css';
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+// import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Paper } from "@material-ui/core";
 import { GearGrid } from "./GearGrid"
-import $ from 'jquery';
+// import $ from 'jquery';
+// import Draggable from 'react-draggable';
+// import { allowDrop, drop} from "./drop";
 
-// const useStyles = makeStyles((theme) => ({
-
-//   grid: {
-//     width : '100%',
-//     margin : '0px'
-//   },
-
-//   paper: {
-//     padding: theme.spacing(2)
-
-//   }
-
-// }));
 
 
 
@@ -30,6 +18,19 @@ function GearItem() {
   </Grid>;
 }
 
+export var allowDrop = function(event) {
+  event.preventDefault();
+}
+
+export var drop = function(event) {
+  event.preventDefault();
+  var data = event.dataTransfer.getData("Text");
+  console.log(localStorage);
+
+  localStorage.setItem('firstItem', document.getElementById(data))
+  console.log(localStorage);
+  // event.target.appendChild(document.getElementById(data));
+}
 
 function App() {
 
@@ -38,7 +39,11 @@ function App() {
   return (
     <div className="App">
       <GearGrid></GearGrid>
+      <div className = "gearbag" onDrop={(event)=>drop(event)} onDragOver={(event)=>allowDrop(event)}>
+        hello
+      </div>
     </div>
+
   );
 }
 

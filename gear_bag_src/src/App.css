@@ -1,9 +1,17 @@
 .App {
   text-align: center;
-  background-color: red;
   width: 100%;
   min-height: 100vh;
   display: flex;
+}
+
+.gearbag{
+  display: flex;
+
+  width : 500px;
+  height : 300px;
+  background-color: royalblue;
+  border: 10;
 }
 
 .grid-container {

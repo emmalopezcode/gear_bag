@@ -1,6 +1,8 @@
-import { Grid, Paper } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import './App.css';
 import React from "react";
+import Draggable from 'react-draggable';
+
 
 function Desc(data) {
    return <p>
@@ -10,6 +12,18 @@ function Desc(data) {
 
 
 export class GearGrid extends React.Component {
+
+   dragStart(event) {
+      console.log('drag start')
+      event.dataTransfer.setData("Text", event.target.id);
+    }
+    
+    dragging(event) {
+      document.getElementById("demo").innerHTML = "The p element is being dragged";
+    }
+    
+
+
    constructor(props) {
       super(props);
       this.state = {
@@ -26,14 +40,14 @@ export class GearGrid extends React.Component {
          .then(res => res.json())
          .then(
             (result) => {
+               //console.log('soo...')
+
                this.setState({
                   isLoaded: true,
                   data: result
                });
             },
-            // Note: it's important to handle errors here
-            // instead of a catch() block so that we don't swallow
-            // exceptions from actual bugs in components.
+ 
             (error) => {
                this.setState({
                   isLoaded: true,
@@ -44,6 +58,7 @@ export class GearGrid extends React.Component {
    }
 
    render() {
+
       const { error, isLoaded, items, data } = this.state;
       if (error) {
          return <div>Error: {error.message}</div>;
@@ -55,14 +70,20 @@ export class GearGrid extends React.Component {
          var item = data[0];
          console.log(item.namespace)
          return (
+            // <img key={item.toString()} src={item.image.standard}></img>
+
             //<p>{JSON.stringify(data[0])}</p>
             <Grid className="grid-container" container spacing={2} md={9}>
                {data.map(item => (
-                  <Grid item xs={12} md={4}>
-                     <img key= {item.toString()} src = {item.image.standard}></img>
+
+                  <Grid draggable="true" dragStart={(event)=>this.dragStart(event)} dragging={(event)=>this.dragging(event)} item xs={12} md={4} >
+                     <img key={item.toString()} src={item.image.standard}></img>
                   </Grid>
+
                ))}
             </Grid>
+
+
          );
       }
    }
