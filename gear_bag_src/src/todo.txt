@@ -1,0 +1,4 @@
+clean the FREAK up
+format things all nicely
+email about getting the wrong api request
+

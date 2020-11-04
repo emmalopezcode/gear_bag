@@ -5,3 +5,7 @@ get react fully set up with github .5 hrs
 firguring out react 1.5 hrs
 adding making images appear in grid 1.5 hrs
 draggable 1 hrs
+
+11.4.2020
+
+formatting and nice touches 2 hrs

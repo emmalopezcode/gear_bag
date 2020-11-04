@@ -1,52 +1,56 @@
-import { Grid } from "@material-ui/core";
+import { Grid, Paper } from "@material-ui/core";
 import './App.css';
 import React from "react";
-import {allowDrop, drop} from "./App"
 
 export class GearBag extends React.Component {
 
-
     constructor(props) {
-        
 
-        
-        // localStorage.clear();
-        // console.log(localStorage)
         super(props);
         this.state = {
             error: null,
             isLoaded: false,
-            items: []
+            items: JSON.parse(localStorage.getItem('GearBag'))
         };
-
-        for(const key in localStorage){
-            this.state.items.push(localStorage.getItem(key));
-        }   
-
-        console.log(this.state.items)
-
     }
-    //api/2.0/wikis/CATEGORY
+
+    drop(event) {
+        event.preventDefault();
+        var data = event.dataTransfer.getData("Text");
+        var currArray = JSON.parse(localStorage.getItem('GearBag'));
+        currArray.push(data);
+        localStorage.setItem('GearBag', JSON.stringify(currArray));
+        this.setState({
+            items: currArray
+        })
+    }
+
+    allowDrop(event) {
+        event.preventDefault();
+    }
 
 
 
     render() {
-                    console.log(this.state.items.length);
 
         return (
-            // <img key={item.toString()} src={item.image.standard}></img>
 
-            //<p>{JSON.stringify(data[0])}</p>
-            <div className = "gearbag" onDrop={(event)=>drop(event)} onDragOver={(event)=>allowDrop(event)}>
-                {this.state.items.map(item => (
-                    //console.log(this.state.items);
+            //<div 
+                <Grid className="gearbag" container spacing={2} md={4} onDrop={(event) => this.drop(event)} onDragOver={(event) => this.allowDrop(event)}>
 
-                    
+                    {this.state.items.map(item => (
+                        <Grid item md={6}>
 
-                    <img  src={item}></img>
+                            <img key={Math.random() + ""} src={item}></img>
+                        </Grid>
 
-                ))}
-            </div>
+
+                    ))}
+                </Grid>
+
+            //</div>
+
+
 
 
 

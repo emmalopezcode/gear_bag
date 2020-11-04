@@ -1,47 +1,43 @@
 import './App.css';
 import React from "react";
-// import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Paper } from "@material-ui/core";
 import { GearGrid } from "./GearGrid"
-// import $ from 'jquery';
-// import Draggable from 'react-draggable';
-// import { allowDrop, drop} from "./drop";
 import { GearBag } from './GearBag'
+import { logoPath, textPath } from './assets.json'
 
-var uniqueId = 0;
-
-
-
-function GearItem() {
-  return <Grid item xs={12} md={4}>
-    <Paper className="test"> 10 </Paper>
-  </Grid>;
-}
-
-export var allowDrop = function(event) {
-  event.preventDefault();
-}
-
-export var drop = function(event) {
-  event.preventDefault();
-  var data = event.dataTransfer.getData("Text");
-  //console.log(data)
-  localStorage.setItem(uniqueId, data)
-  uniqueId++;
-  // event.target.appendChild(document.getElementById(data));
-}
 
 function App() {
+
+  // <div className = "spacer">
+
+  // </div>
+
+  // <button onClick={()=>{localStorage.setItem('GearBag', JSON.stringify([]))}}>
+  //   clear
+  // </button>
 
 
 
   return (
-    <div className="App">
-      <GearGrid></GearGrid>
-      <GearBag></GearBag>
+    <div className="Shell">
+      <div className="head">
+        <svg width="118" height="36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d={logoPath} fill="#1975F1"></path>
+          <path d={textPath} fill="#fff"></path>
+        </svg>
+      </div>
+
+      <div className="App">
+        <GearGrid></GearGrid>
+        <div className="spacer"></div>
+        <GearBag></GearBag>
+
+      </div>
     </div>
 
   );
 }
 
 export default App;
+
+

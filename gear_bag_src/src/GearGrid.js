@@ -1,13 +1,6 @@
-import { Grid } from "@material-ui/core";
+import { Grid, Paper } from "@material-ui/core";
 import './App.css';
 import React from "react";
-
-
-function Desc(data) {
-   return <p>
-      {data}
-   </p>;
-}
 
 
 export class GearGrid extends React.Component {
@@ -17,12 +10,7 @@ export class GearGrid extends React.Component {
       event.dataTransfer.setData("Text", event.target.id);
     }
     
-    dragging(event) {
-      document.getElementById("demo").innerHTML = "The p element is being dragged";
-    }
-    
-
-
+   
    constructor(props) {
       super(props);
       this.state = {
@@ -64,22 +52,19 @@ export class GearGrid extends React.Component {
       } else if (!isLoaded) {
          return <div>Loading...</div>;
       } else {
-         console.log('this is the result')
-         console.log(data)
-         var item = data[0];
-         console.log(item.namespace)
-         return (
-            // <img key={item.toString()} src={item.image.standard}></img>
+            return (
 
-            //<p>{JSON.stringify(data[0])}</p>
-            <Grid className="grid-container" container spacing={2} md={4}>
+               
+
+            <Grid className="grid-container" container spacing={2} md={9}>
                {data.map(item => (
 
                   <Grid draggable="true" dragStart={(event)=>this.dragStart(event)} dragging={(event)=>this.dragging(event)} item xs={12} md={4} >
-                     <img key={item.toString()} src={item.image.standard}></img>
+                     <img  key={item.toString()} src={item.image.standard}></img>
                   </Grid>
 
                ))}
+               
             </Grid>
 
 
