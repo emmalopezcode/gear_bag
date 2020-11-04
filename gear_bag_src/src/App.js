@@ -6,9 +6,9 @@ import { GearGrid } from "./GearGrid"
 // import $ from 'jquery';
 // import Draggable from 'react-draggable';
 // import { allowDrop, drop} from "./drop";
+import { GearBag } from './GearBag'
 
-
-
+var uniqueId = 0;
 
 
 
@@ -25,10 +25,9 @@ export var allowDrop = function(event) {
 export var drop = function(event) {
   event.preventDefault();
   var data = event.dataTransfer.getData("Text");
-  console.log(localStorage);
-
-  localStorage.setItem('firstItem', document.getElementById(data))
-  console.log(localStorage);
+  //console.log(data)
+  localStorage.setItem(uniqueId, data)
+  uniqueId++;
   // event.target.appendChild(document.getElementById(data));
 }
 
@@ -39,9 +38,7 @@ function App() {
   return (
     <div className="App">
       <GearGrid></GearGrid>
-      <div className = "gearbag" onDrop={(event)=>drop(event)} onDragOver={(event)=>allowDrop(event)}>
-        hello
-      </div>
+      <GearBag></GearBag>
     </div>
 
   );

@@ -1,7 +1,6 @@
 import { Grid } from "@material-ui/core";
 import './App.css';
 import React from "react";
-import Draggable from 'react-draggable';
 
 
 function Desc(data) {
@@ -73,7 +72,7 @@ export class GearGrid extends React.Component {
             // <img key={item.toString()} src={item.image.standard}></img>
 
             //<p>{JSON.stringify(data[0])}</p>
-            <Grid className="grid-container" container spacing={2} md={9}>
+            <Grid className="grid-container" container spacing={2} md={4}>
                {data.map(item => (
 
                   <Grid draggable="true" dragStart={(event)=>this.dragStart(event)} dragging={(event)=>this.dragging(event)} item xs={12} md={4} >
