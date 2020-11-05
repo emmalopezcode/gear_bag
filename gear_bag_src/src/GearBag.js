@@ -42,13 +42,13 @@ export class GearBag extends React.Component {
         } else {
             return (
 
-                <List className="gearbag" component="nav" horizontal={false}
+                <List className="gearbag" component="nav"
                     onDrop={(event) => this.drop(event)}
                     onDragOver={(event) => this.allowDrop(event)}>
 
                     {this.state.items.map((item, index) => (
-                        <ListItem>
-                            <img className="griditem" key={index} src={item}></img>
+                        <ListItem  key={index} >
+                            <img className="griditem"src={item}></img>
                         </ListItem>
 
                     ))}

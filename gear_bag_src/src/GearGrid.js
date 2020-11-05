@@ -43,7 +43,7 @@ export class GearGrid extends React.Component {
 
    render() {
 
-      const { error, isLoaded, items, data } = this.state;
+      const { error, isLoaded, data } = this.state;
       if (error) {
          return <div>Error: {error.message}</div>;
       } else if (!isLoaded) {
@@ -55,11 +55,12 @@ export class GearGrid extends React.Component {
                {data.map((item,index) => (
 
                   <Grid
+                     item md={4}
                      key={index}
                      draggable="true"
                      dragStart={(event) => this.dragStart(event)}
                      dragging={(event) => this.dragging(event)}
-                     item xs={12} md={4} >
+                     xs={12}  >
                      <img  src={item.image.standard}></img>
                   </Grid>
 
