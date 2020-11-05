@@ -25,12 +25,23 @@ function App() {
           <path d={logoPath} fill="#1975F1"></path>
           <path d={textPath} fill="#fff"></path>
         </svg>
-      </div>
 
+        <button onClick={()=>{localStorage.setItem('GearBag', JSON.stringify([]))}}>
+          clear
+        </button>
+        
+
+      </div>
+      <p id="geargrid-label">
+            Feel free to select any items you like!
+          </p>
+          <p id="gearbag-label">
+            Saved Gear
+          </p>
       <div className="App">
         <GearGrid></GearGrid>
-        <div className="spacer"></div>
-        <GearBag></GearBag>
+      <div className="spacer"></div>
+      <GearBag></GearBag>
 
       </div>
     </div>

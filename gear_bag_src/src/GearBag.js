@@ -9,7 +9,6 @@ export class GearBag extends React.Component {
         super(props);
         this.state = {
             error: null,
-            isLoaded: false,
             items: JSON.parse(localStorage.getItem('GearBag'))
         };
     }
@@ -32,28 +31,35 @@ export class GearBag extends React.Component {
 
 
     render() {
+        const { error, isLoaded, items, data } = this.state;
 
-        return (
+        if (error) {
+            return <div>Error: {error.message}</div>;
+        
+        } else {
+            return (
 
-            //<div 
-                <Grid className="gearbag" container spacing={2} md={4} onDrop={(event) => this.drop(event)} onDragOver={(event) => this.allowDrop(event)}>
+                <Grid
+                className="gearbag"
+                container
+                spacing={2}
+                md={6}
+                onDrop={(event) => this.drop(event)}
+                onDragOver={(event) => this.allowDrop(event)}>
+        
+                {this.state.items.map(item => (
+                  //  <Grid item xs={12} md={6} className="griditem">
+        
+                        <img className="griditem" key={Math.random() + ""} src={item}></img>
+                    //</Grid>
+        
+        
+                ))}
+            </Grid>
 
-                    {this.state.items.map(item => (
-                        <Grid item md={6}>
-
-                            <img key={Math.random() + ""} src={item}></img>
-                        </Grid>
 
 
-                    ))}
-                </Grid>
-
-            //</div>
-
-
-
-
-
-        );
+            );
+        }
     }
 }
