@@ -1,4 +1,4 @@
-import { Grid, Paper } from "@material-ui/core";
+import { Grid} from "@material-ui/core";
 import './App.css';
 import React from "react";
 
@@ -31,8 +31,6 @@ export class GearBag extends React.Component {
 
 
     render() {
-        const { error, isLoaded, items, data } = this.state;
-
         if (error) {
             return <div>Error: {error.message}</div>;
         

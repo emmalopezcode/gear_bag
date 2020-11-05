@@ -1,6 +1,5 @@
 import './App.css';
 import React from "react";
-import { Grid, Paper } from "@material-ui/core";
 import { GearGrid } from "./GearGrid"
 import { GearBag } from './GearBag'
 import { logoPath, textPath } from './assets.json'
