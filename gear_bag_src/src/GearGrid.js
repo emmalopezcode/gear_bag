@@ -1,40 +1,37 @@
-import { Grid, Paper } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import './App.css';
 import React from "react";
-
 
 export class GearGrid extends React.Component {
 
    dragStart(event) {
       console.log('drag start')
       event.dataTransfer.setData("Text", event.target.id);
-    }
-    
-   
+   }
+
    constructor(props) {
       super(props);
       this.state = {
          error: null,
          isLoaded: false,
          items: [],
-         data: null
+         data: null,
+         index: 0
       };
    }
-   //api/2.0/wikis/CATEGORY
 
    componentDidMount() {
       fetch("https://www.ifixit.com/api/2.0/wikis/CATEGORY")
          .then(res => res.json())
          .then(
             (result) => {
-               //console.log('soo...')
 
                this.setState({
                   isLoaded: true,
                   data: result
                });
             },
- 
+
             (error) => {
                this.setState({
                   isLoaded: true,
@@ -52,23 +49,21 @@ export class GearGrid extends React.Component {
       } else if (!isLoaded) {
          return <div>Loading...</div>;
       } else {
-            return (
+         return (
 
-               
-               
             <Grid className="grid-container" container spacing={2} md={9}>
                {data.map(item => (
 
-                  <Grid 
-                     draggable="true" 
-                     dragStart={(event)=>this.dragStart(event)} 
-                     dragging={(event)=>this.dragging(event)} 
+                  <Grid
+                     draggable="true"
+                     dragStart={(event) => this.dragStart(event)}
+                     dragging={(event) => this.dragging(event)}
                      item xs={12} md={4} >
-                     <img  key={item.toString()} src={item.image.standard}></img>
+                     <img key={item.toString()} src={item.image.standard}></img>
                   </Grid>
 
                ))}
-               
+
             </Grid>
 
 

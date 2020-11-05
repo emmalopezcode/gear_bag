@@ -1,61 +1,58 @@
-import { Grid} from "@material-ui/core";
+import { List, ListItem } from "@material-ui/core";
 import './App.css';
 import React from "react";
 
 export class GearBag extends React.Component {
 
     constructor(props) {
-
         super(props);
         this.state = {
             error: null,
-            items: JSON.parse(localStorage.getItem('GearBag'))
+            items: [JSON.parse(localStorage.getItem('GearBag'))]
         };
+    }
+
+    isInGearBag(string) {
+        var currArray = JSON.parse(localStorage.getItem('GearBag'));
+        return (currArray.indexOf(string));
     }
 
     drop(event) {
         event.preventDefault();
         var data = event.dataTransfer.getData("Text");
         var currArray = JSON.parse(localStorage.getItem('GearBag'));
-        currArray.push(data);
-        localStorage.setItem('GearBag', JSON.stringify(currArray));
-        this.setState({
-            items: currArray
-        })
+
+        if (currArray.indexOf(data) < 0) {
+            currArray.push(data);
+            localStorage.setItem('GearBag', JSON.stringify(currArray));
+            this.setState({
+                items: currArray
+            });
+        }
     }
 
     allowDrop(event) {
         event.preventDefault();
     }
 
-
-
     render() {
-        if (error) {
-            return <div>Error: {error.message}</div>;
-        
+        if (this.error) {
+            return <div>Error: {this.error.message}</div>;
+
         } else {
             return (
 
-                <Grid
-                className="gearbag"
-                container
-                spacing={2}
-                md={6}
-                onDrop={(event) => this.drop(event)}
-                onDragOver={(event) => this.allowDrop(event)}>
-        
-                {this.state.items.map(item => (
-                  //  <Grid item xs={12} md={6} className="griditem">
-        
-                        <img className="griditem" key={Math.random() + ""} src={item}></img>
-                    //</Grid>
-        
-        
-                ))}
-            </Grid>
+                <List className="gearbag" component="nav" horizontal={false}
+                    onDrop={(event) => this.drop(event)}
+                    onDragOver={(event) => this.allowDrop(event)}>
 
+                    {this.state.items.map((item, index) => (
+                        <ListItem>
+                            <img className="griditem" key={index} src={item}></img>
+                        </ListItem>
 
+                    ))}
+                </List>
 
             );
         }
