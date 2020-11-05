@@ -9,3 +9,8 @@ draggable 1 hrs
 11.4.2020
 
 formatting and nice touches 2 hrs
+
+11.5.2020
+
+fixing the logic to prevent duplicate adds .25hrs
+fixing an issue with spacing in the gear bag .5 hrs
