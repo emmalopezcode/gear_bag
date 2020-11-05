@@ -52,14 +52,15 @@ export class GearGrid extends React.Component {
          return (
 
             <Grid className="grid-container" container spacing={2} md={9}>
-               {data.map(item => (
+               {data.map((item,index) => (
 
                   <Grid
+                     key={index}
                      draggable="true"
                      dragStart={(event) => this.dragStart(event)}
                      dragging={(event) => this.dragging(event)}
                      item xs={12} md={4} >
-                     <img key={item.toString()} src={item.image.standard}></img>
+                     <img  src={item.image.standard}></img>
                   </Grid>
 
                ))}
