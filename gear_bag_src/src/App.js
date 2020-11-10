@@ -7,17 +7,7 @@ import { logoPath, textPath } from './assets.json'
 
 function App() {
 
-  // <div className = "spacer">
-
-  // </div>
-
-  // <button onClick={()=>{localStorage.setItem('GearBag', JSON.stringify([]))}}>
-  //   clear
-  // </button>
-
-
-
-  return (
+    return (
     <div className="Shell">
       <div className="head">
         <svg width="118" height="36" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -25,7 +15,7 @@ function App() {
           <path d={textPath} fill="#fff"></path>
         </svg>
 
-        <button onClick={()=>{localStorage.setItem('GearBag', JSON.stringify([]))}}>
+        <button onClick={()=>{localStorage.setItem('GearBag', null)}}>
           clear
         </button>
         

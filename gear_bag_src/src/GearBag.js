@@ -6,29 +6,54 @@ export class GearBag extends React.Component {
 
     constructor(props) {
         super(props);
+
+        var currStorage = [];
+        if(localStorage.getItem('GearBag')){
+            currStorage = JSON.parse(localStorage.getItem('GearBag'));
+        }
+
         this.state = {
             error: null,
-            items: [JSON.parse(localStorage.getItem('GearBag'))]
+            items: [currStorage]
         };
     }
 
     isInGearBag(string) {
-        var currArray = JSON.parse(localStorage.getItem('GearBag'));
-        return (currArray.indexOf(string));
+        if(localStorage.getItem('GearBag')){
+
+            var currArray = JSON.parse(localStorage.getItem('GearBag'));
+            return (currArray.indexOf(string));
+        }else{
+            return false;
+        }
     }
 
     drop(event) {
-        event.preventDefault();
         var data = event.dataTransfer.getData("Text");
-        var currArray = JSON.parse(localStorage.getItem('GearBag'));
 
-        if (currArray.indexOf(data) < 0) {
+        var currArray;
+
+        if( JSON.parse(localStorage.getItem('GearBag')) === null){
+
+            currArray = [];
             currArray.push(data);
             localStorage.setItem('GearBag', JSON.stringify(currArray));
             this.setState({
                 items: currArray
             });
+        }else{
+            var currArray = JSON.parse(localStorage.getItem('GearBag'));
+
+            if (currArray.indexOf(data) < 0) {
+                currArray.push(data);
+                localStorage.setItem('GearBag', JSON.stringify(currArray));
+                this.setState({
+                    items: currArray
+                });
+            }
         }
+
+        
     }
 
     allowDrop(event) {
