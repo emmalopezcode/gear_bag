@@ -15,7 +15,7 @@ function App() {
           <path d={textPath} fill="#fff"></path>
         </svg>
 
-        <button onClick={()=>{localStorage.setItem('GearBag', null)}}>
+        <button onClick={()=>{localStorage.setItem('GearBag', JSON.stringify([]))}}>
           clear
         </button>
         
