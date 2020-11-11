@@ -8,7 +8,7 @@ export class GearBag extends React.Component {
         super(props);
 
         var currStorage = [];
-        if(localStorage.getItem('GearBag')){
+        if(JSON.parse(localStorage.getItem('GearBag'))){
             currStorage = JSON.parse(localStorage.getItem('GearBag'));
         }
 
