@@ -29,7 +29,6 @@ function App() {
           </p>
       <div className="App">
         <GearGrid></GearGrid>
-      <div className="spacer"></div>
       <GearBag></GearBag>
 
       </div>

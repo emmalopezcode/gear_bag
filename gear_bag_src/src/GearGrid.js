@@ -9,19 +9,9 @@ export class GearGrid extends React.Component {
       event.dataTransfer.setData("Text", event.target.id);
    }
 
-   constructor(props) {
-      super(props);
-      this.state = {
-         error: null,
-         isLoaded: false,
-         items: [],
-         data: null,
-         index: 0
-      };
-   }
-
-   componentDidMount() {
-      fetch("https://www.ifixit.com/api/2.0/wikis/CATEGORY")
+   getApiData() {
+      console.log('getApidata called');
+      fetch(`https://www.ifixit.com/api/2.0/wikis/CATEGORY?offset=${this.state.page*10}&limit=10`)
          .then(res => res.json())
          .then(
             (result) => {
@@ -38,12 +28,43 @@ export class GearGrid extends React.Component {
                   error
                });
             }
-         )
+         );
+   }
+
+   next() {
+      var change = this.state.page;
+      change++;
+      this.setState({ page: change });
+      this.getApiData();
+
+   }
+
+   previous() {
+      if (this.state.page > 0) {
+         var change = this.state.page;
+         change--;
+         this.setState({ page: change });
+         this.getApiData();
+      }
+   }
+
+   constructor(props) {
+      super(props);
+      this.state = {
+         error: null,
+         isLoaded: false,
+         data: null,
+         page: 0
+      };
+   }
+
+   componentDidMount() {
+     this.getApiData();
    }
 
    render() {
 
-      const { error, isLoaded, data } = this.state;
+      const { error, isLoaded, data, page } = this.state;
       if (error) {
          return <div>Error: {error.message}</div>;
       } else if (!isLoaded) {
@@ -51,23 +72,39 @@ export class GearGrid extends React.Component {
       } else {
          return (
 
-            <Grid className="grid-container" container spacing={2} md={9}>
-               {data.map((item,index) => (
+            <div>
 
-                  <Grid
-                     item md={4}
-                     key={index}
-                     draggable="true"
-                     dragStart={(event) => this.dragStart(event)}
-                     dragging={(event) => this.dragging(event)}
-                     xs={12}  >
-                     <img  src={item.image.standard}></img>
-                  </Grid>
+               <p>
+                  Current page : {page}
+               </p>
 
-               ))}
+               <button onClick={() => { this.previous() }}>
+                  Previous
+               </button>
 
-            </Grid>
+               <button onClick={() => { this.next() }}>
+                  Next
+               </button>
 
+
+               <Grid className="grid-container" container spacing={2} md={9}>
+                  {data.map((item, index) => (
+
+                     <Grid
+                        item md={4}
+                        key={index}
+                        draggable="true"
+                        dragStart={(event) => this.dragStart(event)}
+                        dragging={(event) => this.dragging(event)}
+                        xs={12}  >
+                        <img src={item.image.medium}></img>
+                     </Grid>
+
+                  ))}
+
+               </Grid>
+
+            </div>
 
          );
       }

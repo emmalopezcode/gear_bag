@@ -25,3 +25,10 @@ react classes i will need
 Grid Element { apiData}
 Grid {array of gridElements - informed by api req}
 Bag {array of gridElements - informed by localStorage}
+
+
+next part of the plan
+
+	gear grid needs to have a next page button and previous
+	and when you click that the number of the page changes
+	this just changes the state, and reloads the page
