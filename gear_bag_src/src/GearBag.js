@@ -4,36 +4,33 @@ import React from "react";
 
 export class GearBag extends React.Component {
 
+    
+    //constructor of the component containing your items
     constructor(props) {
         super(props);
-
         var currStorage = [];
-        if(JSON.parse(localStorage.getItem('GearBag'))){
+
+        //extracts and parses localstorage data (ensuring permanence post-reload)
+        if (JSON.parse(localStorage.getItem('GearBag'))) {
             currStorage = JSON.parse(localStorage.getItem('GearBag'));
         }
 
         this.state = {
             error: null,
-            items: [currStorage]
+            items: currStorage
         };
     }
 
-    isInGearBag(string) {
-        if(localStorage.getItem('GearBag')){
-
-            var currArray = JSON.parse(localStorage.getItem('GearBag'));
-            return (currArray.indexOf(string));
-        }else{
-            return false;
-        }
-    }
-
     drop(event) {
-        var data = event.dataTransfer.getData("Text");
 
+        //the data of the dragged object
+        var data = event.dataTransfer.getData("Text");
         var currArray;
 
-        if( JSON.parse(localStorage.getItem('GearBag')) === null){
+        //logic for extracting data from the localStorage and showing it in the component
+
+        //localStorage is untouched
+        if (JSON.parse(localStorage.getItem('GearBag')) === null) {
 
             currArray = [];
             currArray.push(data);
@@ -41,8 +38,11 @@ export class GearBag extends React.Component {
             this.setState({
                 items: currArray
             });
-        }else{
-            var currArray = JSON.parse(localStorage.getItem('GearBag'));
+
+        //localstorage at GearBag has data already
+        } else {
+
+            currArray = JSON.parse(localStorage.getItem('GearBag'));
 
             if (currArray.indexOf(data) < 0) {
                 currArray.push(data);
@@ -52,12 +52,15 @@ export class GearBag extends React.Component {
                 });
             }
         }
-
-        
     }
 
     allowDrop(event) {
         event.preventDefault();
+    }
+
+    clear(){
+        localStorage.clear();
+        this.setState({items: []});
     }
 
     render() {
@@ -67,17 +70,27 @@ export class GearBag extends React.Component {
         } else {
             return (
 
-                <List className="gearbag" component="nav"
-                    onDrop={(event) => this.drop(event)}
-                    onDragOver={(event) => this.allowDrop(event)}>
+                <div height="200px">
+                    <p>
+                        Gear
+                    </p>
 
-                    {this.state.items.map((item, index) => (
-                        <ListItem  key={index} >
-                            <img className="griditem"src={item}></img>
-                        </ListItem>
+                    <button onClick={() => { this.clear() }}>
+                        clear
+                    </button>
 
-                    ))}
-                </List>
+                    <List className="gearbag" component="nav"
+                        onDrop={(event) => this.drop(event)}
+                        onDragOver={(event) => this.allowDrop(event)}>
+
+                        {this.state.items.map((item, index) => (
+                            <ListItem key={index} >
+                                <img alt="" className="griditem" src={item}></img>
+                            </ListItem>
+
+                        ))}
+                    </List>
+                </div>
 
             );
         }

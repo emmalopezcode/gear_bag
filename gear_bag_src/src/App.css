@@ -13,8 +13,7 @@ p{
 }
 
 #geargrid-label{
-  position:absolute;
-  left: 8%
+  font-size:1em;
 }
 
 #gearbag-label{
@@ -23,8 +22,6 @@ p{
 
   
 }
-
-
 
 .Shell {
   background-color: #282c34;
@@ -57,7 +54,8 @@ img{
 }
 
 .spacer {
-  width: 7%;
+  width: 20%;
+  min-height:200px;
 
 }
 

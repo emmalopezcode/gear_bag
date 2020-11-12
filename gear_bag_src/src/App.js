@@ -15,20 +15,14 @@ function App() {
           <path d={textPath} fill="#fff"></path>
         </svg>
 
-        <button onClick={()=>{localStorage.clear()}}>
-          clear
-        </button>
+      
         
 
       </div>
-      <p id="geargrid-label">
-            Feel free to select any items you like!
-          </p>
-          <p id="gearbag-label">
-            Saved Gear
-          </p>
+      
       <div className="App">
         <GearGrid></GearGrid>
+        <div className="spacer"></div>
       <GearBag></GearBag>
 
       </div>

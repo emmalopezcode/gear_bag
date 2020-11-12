@@ -1,1 +1,1 @@
-email about getting the wrong api request
+delete dragStart and dragging once you are sure you dont need it

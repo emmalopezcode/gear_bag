@@ -4,14 +4,9 @@ import React from "react";
 
 export class GearGrid extends React.Component {
 
-   dragStart(event) {
-      console.log('drag start')
-      event.dataTransfer.setData("Text", event.target.id);
-   }
-
+   //extracts data from the wikis in order to show
    getApiData() {
-      console.log('getApidata called');
-      fetch(`https://www.ifixit.com/api/2.0/wikis/CATEGORY?offset=${this.state.page*10}&limit=10`)
+      fetch(`https://www.ifixit.com/api/2.0/wikis/CATEGORY?offset=${this.state.page * 12}&limit=12`)
          .then(res => res.json())
          .then(
             (result) => {
@@ -31,20 +26,18 @@ export class GearGrid extends React.Component {
          );
    }
 
+   //methods for pagination
+   //this.getApiData as a callback because setState is asynchronous
    next() {
       var change = this.state.page;
-      change++;
-      this.setState({ page: change });
-      this.getApiData();
+      this.setState({ page: ++change }, this.getApiData);
 
    }
 
    previous() {
       if (this.state.page > 0) {
          var change = this.state.page;
-         change--;
-         this.setState({ page: change });
-         this.getApiData();
+         this.setState({ page: --change }, this.getApiData);
       }
    }
 
@@ -59,12 +52,12 @@ export class GearGrid extends React.Component {
    }
 
    componentDidMount() {
-     this.getApiData();
+      this.getApiData();
    }
 
    render() {
 
-      const { error, isLoaded, data, page } = this.state;
+      const { error, isLoaded, data } = this.state;
       if (error) {
          return <div>Error: {error.message}</div>;
       } else if (!isLoaded) {
@@ -75,7 +68,7 @@ export class GearGrid extends React.Component {
             <div>
 
                <p>
-                  Current page : {page}
+                  Feel free to select any items you like!
                </p>
 
                <button onClick={() => { this.previous() }}>
@@ -87,17 +80,17 @@ export class GearGrid extends React.Component {
                </button>
 
 
-               <Grid className="grid-container" container spacing={2} md={9}>
+               <Grid className="grid-container" container spacing={2}>
                   {data.map((item, index) => (
 
                      <Grid
                         item md={4}
                         key={index}
                         draggable="true"
-                        dragStart={(event) => this.dragStart(event)}
-                        dragging={(event) => this.dragging(event)}
                         xs={12}  >
-                        <img src={item.image.medium}></img>
+                        <img alt='' src={item.image.medium}></img>
+                        <p id='geargrid-label'> {item.title}</p>
+
                      </Grid>
 
                   ))}
